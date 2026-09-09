@@ -33,14 +33,14 @@ function fetchTravelData() {
   function handleSearch() {
     const searchInput = document.getElementById('searchInput');
     const resultsContainer = document.getElementById('searchResults');
-    
+  
     if (!searchInput || !resultsContainer) return;
   
     const keyword = searchInput.value.toLowerCase().trim();
     resultsContainer.innerHTML = '';
   
     if (!keyword) {
-      resultsContainer.innerHTML = '<p class="error-msg">Please enter a keyword to search.</p>';
+      resultsContainer.innerHTML = '<p class="error-msg" style="color: #ffc107; font-weight: bold;">Please enter a keyword to search.</p>';
       return;
     }
   
@@ -80,7 +80,7 @@ function fetchTravelData() {
     resultsContainer.innerHTML = '';
   
     if (items.length === 0) {
-      resultsContainer.innerHTML = '<p class="error-msg">No recommendations found. Try "beach", "temple", or "japan".</p>';
+      resultsContainer.innerHTML = '<p class="error-msg" style="color: #ffc107; font-weight: bold;">No recommendations found. Try "beach", "temple", or "japan".</p>';
       return;
     }
   
@@ -116,3 +116,16 @@ function fetchTravelData() {
     if (searchInput) searchInput.value = '';
     if (resultsContainer) resultsContainer.innerHTML = '';
   }
+  
+  // Enable searching by pressing the Enter key
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          handleSearch();
+        }
+      });
+    }
+  });
