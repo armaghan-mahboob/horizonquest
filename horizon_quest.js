@@ -1,6 +1,5 @@
-// Task 6: Fetch travel recommendations and log to console
 function fetchTravelData() {
-    return fetch('travel_recommendation_api.json')
+    return fetch('horizon_quest_api.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response failed');
@@ -8,13 +7,12 @@ function fetchTravelData() {
         return response.json();
       })
       .then(data => {
-        console.log('Fetched Travel API Data:', data); // Verification log
+        console.log('Fetched Travel API Data:', data);
         return data;
       })
       .catch(error => console.error('Error fetching data:', error));
   }
   
-  // Task 10: Helper function to get current time for a given timezone
   function getLocalTimeString(timeZone) {
     if (!timeZone) return '';
     try {
@@ -32,14 +30,12 @@ function fetchTravelData() {
     }
   }
   
-  // Task 7 & Task 8: Search Keyword Handler and Display Recommendations
   function handleSearch() {
     const searchInput = document.getElementById('searchInput');
     const resultsContainer = document.getElementById('searchResults');
     
     if (!searchInput || !resultsContainer) return;
   
-    // Task 7: Normalize user input to lower case
     const keyword = searchInput.value.toLowerCase().trim();
     resultsContainer.innerHTML = '';
   
@@ -53,18 +49,15 @@ function fetchTravelData() {
   
       let matchedItems = [];
   
-      // Task 7: Accept variations (beach/beaches, temple/temples, country/countries, specific names)
       if (keyword.includes('beach')) {
         matchedItems = data.beaches || [];
       } else if (keyword.includes('temple')) {
         matchedItems = data.temples || [];
       } else if (keyword.includes('country') || keyword.includes('countries')) {
-        // Return cities from all countries if 'country' is searched
         data.countries.forEach(country => {
           matchedItems.push(...country.cities.map(city => ({ ...city, timeZone: country.timeZone })));
         });
       } else {
-        // Search specific country or city names
         data.countries.forEach(country => {
           if (country.name.toLowerCase().includes(keyword)) {
             matchedItems.push(...country.cities.map(city => ({ ...city, timeZone: country.timeZone })));
@@ -78,12 +71,10 @@ function fetchTravelData() {
         });
       }
   
-      // Task 8: Render recommendations
       displayRecommendations(matchedItems);
     });
   }
   
-  // Render result cards into DOM
   function displayRecommendations(items) {
     const resultsContainer = document.getElementById('searchResults');
     resultsContainer.innerHTML = '';
@@ -93,27 +84,19 @@ function fetchTravelData() {
       return;
     }
   
-    // Display heading above grid
-    const heading = document.createElement('h2');
-    heading.className = 'results-heading';
-    heading.innerText = 'Search Results';
-    resultsContainer.appendChild(heading);
-  
-    // Grid wrapper for cards
     const gridDiv = document.createElement('div');
     gridDiv.className = 'recommendations-grid';
   
     items.forEach(item => {
       const card = document.createElement('div');
-      card.className = 'recommendation-card';
+      card.className = 'result-card';
   
-      // Task 10: Calculate local time for country/destination
       const localTime = item.timeZone ? getLocalTimeString(item.timeZone) : '';
       const timeDisplay = localTime ? `<p class="card-time">Current Time: <span>${localTime}</span></p>` : '';
   
       card.innerHTML = `
         <img src="${item.imageUrl}" alt="${item.name}" />
-        <div class="card-content">
+        <div class="result-card-body">
           <h3>${item.name}</h3>
           <p>${item.description}</p>
           ${timeDisplay}
@@ -126,7 +109,6 @@ function fetchTravelData() {
     resultsContainer.appendChild(gridDiv);
   }
   
-  // Task 9: Clear results and search box
   function clearSearch() {
     const searchInput = document.getElementById('searchInput');
     const resultsContainer = document.getElementById('searchResults');
@@ -134,12 +116,3 @@ function fetchTravelData() {
     if (searchInput) searchInput.value = '';
     if (resultsContainer) resultsContainer.innerHTML = '';
   }
-  
-  // Event Listeners setup
-  document.addEventListener('DOMContentLoaded', () => {
-    const btnSearch = document.getElementById('btnSearch');
-    const btnClear = document.getElementById('btnClear');
-  
-    if (btnSearch) btnSearch.addEventListener('click', handleSearch);
-    if (btnClear) btnClear.addEventListener('click', clearSearch);
-  });

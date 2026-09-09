@@ -546,7 +546,7 @@
 
   </div>
 
-  <!-- JavaScript Implementation -->
+  <!-- Navigation and Page Setup Script -->
   <script>
     function navigateTo(pageId) {
       const sections = document.querySelectorAll('.page-section');
@@ -565,128 +565,14 @@
       }
     }
 
-    function fetchTravelData() {
-      return fetch('travel_recommendation_api.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response failed');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Fetched Data:', data);
-          return data;
-        })
-        .catch(err => {
-          console.error("Error fetching travel recommendations:", err);
-        });
-    }
-
-    function getLocalTimeString(timeZone) {
-      if (!timeZone) return '';
-      try {
-        const options = {
-          timeZone: timeZone,
-          hour12: true,
-          hour: 'numeric',
-          minute: 'numeric',
-          second: 'numeric'
-        };
-        return new Date().toLocaleTimeString('en-US', options);
-      } catch (e) {
-        console.error('Invalid TimeZone:', timeZone);
-        return '';
-      }
-    }
-
-    function performSearch() {
-      const query = document.getElementById('searchInput').value.toLowerCase().trim();
-      const resultsDiv = document.getElementById('searchResults');
-      resultsDiv.innerHTML = '';
-
-      if (!query) {
-        return;
-      }
-
-      fetchTravelData().then(data => {
-        if (!data) return;
-
-        let results = [];
-
-        if (query.includes('beach')) {
-          results = data.beaches || [];
-        } else if (query.includes('temple')) {
-          results = data.temples || [];
-        } else if (query.includes('country') || query.includes('countries')) {
-          if (data.countries) {
-            data.countries.forEach(country => {
-              results.push(...country.cities.map(city => ({ ...city, timeZone: country.timeZone })));
-            });
-          }
-        } else {
-          if (data.countries) {
-            data.countries.forEach(country => {
-              if (country.name.toLowerCase().includes(query)) {
-                results.push(...country.cities.map(city => ({ ...city, timeZone: country.timeZone })));
-              } else {
-                country.cities.forEach(city => {
-                  if (city.name.toLowerCase().includes(query)) {
-                    results.push({ ...city, timeZone: country.timeZone });
-                  }
-                });
-              }
-            });
-          }
-        }
-
-        displayResults(results);
-      });
-    }
-
-    function displayResults(items) {
-      const resultsDiv = document.getElementById('searchResults');
-      resultsDiv.innerHTML = '';
-
-      if (items.length === 0) {
-        resultsDiv.innerHTML = '<div style="background: rgba(0,0,0,0.6); padding: 1rem; border-radius: 6px;">No recommendations found for that keyword. Try "beach", "temple", or "japan".</div>';
-        return;
-      }
-
-      const gridDiv = document.createElement('div');
-      gridDiv.className = 'recommendations-grid';
-
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'result-card';
-
-        const localTime = item.timeZone ? getLocalTimeString(item.timeZone) : '';
-        const timeHTML = localTime ? `<p class="card-time">Current Time: ${localTime}</p>` : '';
-
-        card.innerHTML = `
-          <img src="${item.imageUrl}" alt="${item.name}" />
-          <div class="result-card-body">
-            <h3>${item.name}</h3>
-            <p>${item.description}</p>
-            ${timeHTML}
-            <button class="btn-visit" onclick="alert('Exploring ${item.name}!')">Visit</button>
-          </div>
-        `;
-        gridDiv.appendChild(card);
-      });
-
-      resultsDiv.appendChild(gridDiv);
-    }
-
-    function clearSearch() {
-      document.getElementById('searchInput').value = '';
-      document.getElementById('searchResults').innerHTML = '';
-    }
-
     function handleFormSubmit(event) {
       event.preventDefault();
       alert('Thank you for contacting us! We will get back to you shortly.');
       event.target.reset();
     }
   </script>
+
+  <!-- External JS file with Search Logic -->
+  <script src="horizon_quest.js"></script>
 </body>
 </html>
