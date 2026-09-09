@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Task 1: HTML template & Title -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HorizonQuest</title>
@@ -28,7 +27,7 @@
       flex-direction: column;
     }
 
-    /* Task 2: Navbar Styling */
+    /* Navbar Styling */
     header {
       background-color: #0b2530;
       padding: 0.8rem 2rem;
@@ -99,7 +98,7 @@
       font-size: 0.9rem;
     }
 
-    .btn-search {
+    .btn-search, .btn-clear {
       background-color: #00897b;
       color: white;
       border: none;
@@ -109,21 +108,7 @@
       font-size: 0.85rem;
     }
 
-    .btn-search:hover {
-      background-color: #00796b;
-    }
-
-    .btn-clear {
-      background-color: #00897b;
-      color: white;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .btn-clear:hover {
+    .btn-search:hover, .btn-clear:hover {
       background-color: #00796b;
     }
 
@@ -170,7 +155,7 @@
       display: flex;
     }
 
-    /* Task 3: Home Page Styling */
+    /* Home Page Styling */
     .home-container {
       display: flex;
       flex-direction: column;
@@ -213,7 +198,7 @@
       background-color: #004d40;
     }
 
-    /* Task 8: CSS Grid Search Results Container */
+    /* Grid Search Results Container */
     .results-container {
       margin-left: 2rem;
       flex: 1;
@@ -267,7 +252,6 @@
       line-height: 1.4;
     }
 
-    /* Task 10: Timezone Display Styling */
     .card-time {
       font-size: 0.85rem;
       font-weight: bold;
@@ -291,7 +275,7 @@
       background-color: #004d40;
     }
 
-    /* Task 4: About Us Page Styling */
+    /* About Us Page Styling */
     .about-container {
       display: flex;
       flex-direction: column;
@@ -375,7 +359,7 @@
       margin-top: auto;
     }
 
-    /* Task 5: Contact Us Page Styling */
+    /* Contact Us Page Styling */
     .contact-container {
       display: flex;
       justify-content: space-between;
@@ -455,23 +439,20 @@
 </head>
 <body>
 
-  <!-- Task 2: Navbar -->
+  <!-- Navbar -->
   <header>
     <nav>
-      <!-- Logo & Website Name -->
       <div class="logo-container">
         <i class="fa-solid fa-globe logo-icon"></i>
         <span>HorizonQuest</span>
       </div>
 
-      <!-- Navigation Links -->
       <ul class="nav-links">
         <li><a onclick="navigateTo('home')">Home</a></li>
         <li><a onclick="navigateTo('about')">About Us</a></li>
         <li><a onclick="navigateTo('contact')">Contact Us</a></li>
       </ul>
 
-      <!-- Search Bar & Action Buttons -->
       <div class="search-box" id="navSearchBox">
         <input type="text" id="searchInput" placeholder="Enter a destination or keyword" />
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -484,7 +465,6 @@
   <!-- Main Content Layout -->
   <div class="main-wrapper">
     
-    <!-- Social Media Side Icons -->
     <div class="social-sidebar">
       <a href="#"><i class="fa-brands fa-twitter"></i></a>
       <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -492,47 +472,42 @@
       <a href="#"><i class="fa-brands fa-youtube"></i></a>
     </div>
 
-    <!-- Task 3: Home Page Section -->
+    <!-- Home Page Section -->
     <section id="home" class="page-section active">
       <div class="home-container">
         <h1 class="home-title">EXPLORE DREAM DESTINATION</h1>
         <p class="home-desc">
-          The HorizonQuest Recommendation App helps users explore popular travel destinations through an interactive and user-friendly interface. It allows users to search for beaches, temples, countries, or specific country names to view related cities along with images and descriptions. The app dynamically fetches data from a structured JSON file to display relevant results.
+          The HorizonQuest Recommendation App helps users explore popular travel destinations through an interactive and user-friendly interface. It allows users to search for beaches, temples, countries, or specific country names to view related cities along with images and descriptions.
         </p>
         <button class="btn-book" onclick="alert('Proceeding to booking page!')">Book Now</button>
       </div>
       
-      <!-- Container for rendering search results using Grid -->
       <div id="searchResults" class="results-container"></div>
     </section>
 
-    <!-- Task 4: About Us Section -->
+    <!-- About Us Section -->
     <section id="about" class="page-section">
       <div class="about-container">
         <h1 class="about-title">ABOUT US</h1>
         <div class="about-info-box">
           Welcome to Our Company! We are a team of passionate individuals dedicated to providing excellent services/products to our customers. Our mission is to provide the best experience for people traveling to different destinations around the world.<br><br>
-          Our values include integrity, innovation, customer satisfaction, and teamwork. We believe in putting our customers first and working together to achieve our goals.<br><br>
-          Feel free to explore our website to learn more about what we offer!
+          Our values include integrity, innovation, customer satisfaction, and teamwork. We believe in putting our customers first and working together to achieve our goals.
         </div>
 
         <h2 class="team-section-title">Our Team</h2>
         <div class="team-grid">
-          <!-- Team Member 1 -->
           <div class="team-card">
             <div class="team-avatar"><i class="fa-solid fa-user"></i></div>
             <div class="team-name">John Doe</div>
             <p class="team-desc">John is responsible for overall company strategy and vision.</p>
             <button class="team-role-btn">CEO</button>
           </div>
-          <!-- Team Member 2 -->
           <div class="team-card">
             <div class="team-avatar"><i class="fa-solid fa-user"></i></div>
             <div class="team-name">Celina Thomas</div>
             <p class="team-desc">Celina leads the technical and operations team.</p>
             <button class="team-role-btn">Team Lead</button>
           </div>
-          <!-- Team Member 3 -->
           <div class="team-card">
             <div class="team-avatar"><i class="fa-solid fa-user"></i></div>
             <div class="team-name">Mike Tyson</div>
@@ -543,7 +518,7 @@
       </div>
     </section>
 
-    <!-- Task 5: Contact Us Section -->
+    <!-- Contact Us Section -->
     <section id="contact" class="page-section">
       <div class="contact-container">
         <div class="contact-left">
@@ -551,7 +526,6 @@
           <p class="contact-subtitle">Get in touch</p>
         </div>
 
-        <!-- Contact Form -->
         <form class="contact-form-box" onsubmit="handleFormSubmit(event)">
           <div class="form-group">
             <label for="nameInput">Name</label>
@@ -572,9 +546,8 @@
 
   </div>
 
-  <!-- JavaScript for Navigation, Fetch API & Search Controls -->
+  <!-- JavaScript Implementation -->
   <script>
-    // Navigation logic between pages
     function navigateTo(pageId) {
       const sections = document.querySelectorAll('.page-section');
       sections.forEach(sec => sec.classList.remove('active'));
@@ -584,7 +557,6 @@
         targetSection.classList.add('active');
       }
 
-      // Hide search bar on About and Contact pages per Task 4 specification
       const searchBox = document.getElementById('navSearchBox');
       if (pageId === 'about' || pageId === 'contact') {
         searchBox.style.visibility = 'hidden';
@@ -593,7 +565,6 @@
       }
     }
 
-    // Task 6: Fetch travel recommendations and log to console
     function fetchTravelData() {
       return fetch('travel_recommendation_api.json')
         .then(response => {
@@ -611,7 +582,6 @@
         });
     }
 
-    // Task 10: Helper function to extract local destination time
     function getLocalTimeString(timeZone) {
       if (!timeZone) return '';
       try {
@@ -629,7 +599,6 @@
       }
     }
 
-    // Task 7: Search keyword matching and handling
     function performSearch() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
       const resultsDiv = document.getElementById('searchResults');
@@ -644,7 +613,6 @@
 
         let results = [];
 
-        // Match variations for beaches, temples, countries, or individual names
         if (query.includes('beach')) {
           results = data.beaches || [];
         } else if (query.includes('temple')) {
@@ -671,12 +639,10 @@
           }
         }
 
-        // Task 8 & 10: Display recommendations in CSS grid with local time
         displayResults(results);
       });
     }
 
-    // Task 8: Render result cards in dynamic grid
     function displayResults(items) {
       const resultsDiv = document.getElementById('searchResults');
       resultsDiv.innerHTML = '';
@@ -711,13 +677,11 @@
       resultsDiv.appendChild(gridDiv);
     }
 
-    // Task 9: Clear Search Input & Results
     function clearSearch() {
       document.getElementById('searchInput').value = '';
       document.getElementById('searchResults').innerHTML = '';
     }
 
-    // Task 5: Form Submission Handler
     function handleFormSubmit(event) {
       event.preventDefault();
       alert('Thank you for contacting us! We will get back to you shortly.');
